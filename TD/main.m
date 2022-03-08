@@ -1,4 +1,4 @@
-%% TD1
+%% TD1---------------------------------------------------------------------
 close all; %ferme toutes les fenetres
 clear all; %efface toutes les variables
 
@@ -17,7 +17,7 @@ plot(ce);
 subplot(2,1,2);
 plot(k,S);
 
-%% TD 2 
+%% TD 2 -------------------------------------------------------------------
 close all; %ferme toutes les fenetres
 clear all; %efface toutes les variables
 
@@ -74,3 +74,12 @@ plot(k, S_month);
 subplot(3,1,3);
 plot(k, S_day);
 
+%% TD3---------------------------------------------------------------------
+Nb_point = 200;
+bruit_blanc(Nb_point) = 0; 
+
+for index = 1:Nb_point
+    bruit_blanc(index) = rand(Nb_point);
+end 
+
+plot(bruit_blanc)
