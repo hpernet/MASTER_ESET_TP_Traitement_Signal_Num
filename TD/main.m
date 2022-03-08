@@ -75,11 +75,28 @@ subplot(3,1,3);
 plot(k, S_day);
 
 %% TD3---------------------------------------------------------------------
+close all; %ferme toutes les fenetres
+clear all; %efface toutes les variables
+
+% VARIABLES
 Nb_point = 200;
-bruit_blanc(Nb_point) = 0; 
 
-for index = 1:Nb_point
-    bruit_blanc(index) = rand(Nb_point);
-end 
+bruit_blanc = 10 * randn(1, Nb_point, 'single'); 
 
+% Copute power
+power = sum(bruit_blanc .* bruit_blanc) / Nb_point;
+
+figure(1)
 plot(bruit_blanc)
+
+%[counts,centers] = hist(bruit_blanc, Nb_point/5);
+figure(2)
+subplot(2,1,1);
+histogram(bruit_blanc, Nb_point, 'Normalization', 'count');
+subplot(2,1,2);
+histogram(bruit_blanc, Nb_point, 'Normalization', 'cumcount');
+
+
+
+
+
