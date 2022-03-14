@@ -115,7 +115,7 @@ Reponse_2 = Radar_Rx_signal.Reponse_2;
 t = Radar_Rx_signal.t;
 
 % Compute power
-power = trapz(t, No_signal .* No_signal) / t(Radar_Rx_signal.N);
+power = sum(No_signal .* No_signal) / Nb_point;
 
 % AFFICHAGE
 figure(1);
