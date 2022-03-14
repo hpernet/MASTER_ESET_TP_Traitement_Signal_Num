@@ -159,4 +159,31 @@ plot(V_seuil, PFA)
 subplot(2,1,2);
 semilogy(V_seuil, PFA)
 
+% Analyse spactrale 
+[S,k] = spectre4(Reponse_0, (1/t(2)));
+figure(4)
+plot(k,S)
+
+% Analyse des signaux
+[corr_1, lags1] = xcorr(Reponse_0, Reponse_1);
+indice_1 = find(corr_1 == max(corr_1))
+lags1(indice_1)
+delta_t1 = t(indice_1(1)) / 2
+
+
+[corr_2, lags2] = xcorr(Reponse_0, Reponse_2);
+indice_2 = find(corr_2 == max(corr_2));
+delta_t2 = t(indice_2(1)) / 2
+
+c = 3e8;
+
+d_1 = c * delta_t1
+d_2 = c * delta_t2
+
+
+figure(5)
+subplot(2,1,1);
+plot(corr_1)
+subplot(2,1,2);
+plot(corr_2)
 
