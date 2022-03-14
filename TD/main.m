@@ -114,9 +114,6 @@ Reponse_1 = Radar_Rx_signal.Reponse_1;
 Reponse_2 = Radar_Rx_signal.Reponse_2;
 t = Radar_Rx_signal.t;
 
-% Compute power
-power = trapz(t, No_signal .* No_signal) / t(Radar_Rx_signal.N);
-
 % AFFICHAGE
 figure(1);
 subplot(2,1,1)
@@ -133,5 +130,25 @@ legend('T_0 = 0 s', 'T_1 = 1 s')
 xlabel('Time(ns)')
 ylabel('Réponses (V)')
 grid;
+
+% Compute and plot distribution et stat cumulee
+figure(2)
+subplot(2,1,1);
+histogram(No_signal, 5000, 'Normalization', 'pdf');
+subplot(2,1,2);
+histogram(No_signal, 5000, 'Normalization', 'cdf');
+
+% Compute power
+power = trapz(t, No_signal .* No_signal) / t(Radar_Rx_signal.N);
+
+% Compute ecart type
+ecart_type = sqrt(power);
+
+V_seuil = linspace( 1e-8, 0.4e-3, 1000);
+
+PFA = erfc(V_seuil ./ (ecart_type * sqrt(2))) ./ 2;
+
+figure(3)
+plot(V_seuil, PFA)
 
 
