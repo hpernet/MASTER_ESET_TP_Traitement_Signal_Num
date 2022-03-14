@@ -139,16 +139,24 @@ subplot(2,1,2);
 histogram(No_signal, 5000, 'Normalization', 'cdf');
 
 % Compute power
-power = trapz(t, No_signal .* No_signal) / t(Radar_Rx_signal.N);
+power = trapz(t, No_signal.^2) / t(Radar_Rx_signal.N);
 
-% Compute ecart type
-ecart_type = sqrt(power);
+% Compute stat variables
+moyenne = mean(No_signal);
+variance = var(No_signal);
+ecart_type = sqrt(variance);
 
-V_seuil = linspace( 1e-8, 0.4e-3, 1000);
+% Create Vseuil vector
+V_seuil = 1e-7:1e-7:1e-3;
 
-PFA = erfc(V_seuil ./ (ecart_type * sqrt(2))) ./ 2;
+% Compute PFA(Vseuil)
+PFA = erfc(V_seuil ./ (ecart_type * sqrt(2))) / 2;
 
+% Plot FPA(Vseuil) 
 figure(3)
+subplot(2,1,1);
 plot(V_seuil, PFA)
+subplot(2,1,2);
+semilogy(V_seuil, PFA)
 
 
