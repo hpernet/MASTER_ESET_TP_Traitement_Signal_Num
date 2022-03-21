@@ -5,8 +5,6 @@ close all;
 % ACTIVITE 2 DU TP1 - PARTIE 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% A DECOMMENTER ET A COMPLETER
-
 % Chargement données audio  
  [EnrAudio, Fe]  = audioread('EnreAudioBruite16Bits_1BruitFaibleNew.wav');
 
@@ -63,7 +61,7 @@ subplot(2,1,2)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 
 % Ordre du filtre. 
-N = 10; % A COMPLETER
+N = 30; % A COMPLETER
 
 % Frequence de coupure
 Fcut = 3200; % A COMPLETER
@@ -75,7 +73,7 @@ Fcut = 3200; % A COMPLETER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % BUTTER 
-  [num_1, denum_1] = butter(N , Fcut/Fe, 'low'); %  A COMPLETER
+  [num_1, denum_1] = butter(N , 2*Fcut/Fe, 'low'); %  A COMPLETER
  
 % OU CHEBYSCHEV
 %  OscInBand = 0.1;
@@ -98,9 +96,6 @@ Fcut = 3200; % A COMPLETER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACTIVITE 7  DU TP1 - PARTIE 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
- 
-% A DECOMMENTER ET A COMPLETER
-
 % filtrage du signal audio bruité 
  son_filtre_1 = filter(num_1, denum_1, EnrAudio);% A COMPLETER
  
@@ -125,25 +120,13 @@ Fcut = 3200; % A COMPLETER
    plot(Frequence, Phase_TFfiltre)
    title('Phase de la TF de l''enregistrement audio filtré');
    xlabel('Frequence (Hz)');
-   ylabel('Phase (Degré)'); 
- 
- %  autres commandes de votre choix si besoin ----------------------------
- 
- 
+   ylabel('Phase (Degré)');  
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACTIVITE 8  DU TP1 - PARTIE 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
- 
-% A DECOMMENTER ET A COMPLETER
-
-%  %  autres commandes de votre choix si besoin ----------------------------
-
-% % Sauvegarde de l'enregistrement audio filtré  dans un fichier .wav pour ecoute   
-% audiowrite( ,  ,  , , );  % A COMPLETER
- 
-%  %  autres commandes de votre choix si besoin ----------------------------
-
+% Sauvegarde de l'enregistrement audio filtré  dans un fichier .wav pour ecoute   
+audiowrite('output.wav' ,  son_filtre_1,  Fe);  % A COMPLETER
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACTIVITE 9  DU TP1 - PARTIE 1
