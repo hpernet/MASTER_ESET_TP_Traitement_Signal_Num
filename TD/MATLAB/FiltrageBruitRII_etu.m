@@ -36,7 +36,7 @@ ylabel('Amplitude (V)');
 
 %calcul de la TF de l'enregistrement audio bruité puis du module et de la phase
 TF_audioBruite = fftshift(fft(EnrAudio, NbPoint));
-Module_TF = abs(TF_audioBruite) / NbPoint;% A COMPLETER
+Module_TF = abs(TF_audioBruite) / NbPoint;
 Phase_TF  = (360/(2*pi)) * angle(TF_audioBruite);
 
 % pas frequentiel
@@ -90,10 +90,9 @@ Fcut = 3200; % A COMPLETER
  freqz(num_1, denum_1, [], Fe);
  title('Filtre Passe Bas'); 
 
-%  figure(4);
+%  figure(3);
 %  freqz(num_2, denum_2, [], Fe);
 %  title('Filtre Passe Bas'); 
-%  autres commandes de votre choix si besoin ----------------------------
 
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -102,26 +101,34 @@ Fcut = 3200; % A COMPLETER
  
 % A DECOMMENTER ET A COMPLETER
 
-% % filtrage du signal audio bruité 
-%  son_filtre_1=filter( , ,  );% A COMPLETER
-%  
-%  % tracé de l'enregistrement audio filtré dans le domaine temps
-%  figure(4);
-%  % A COMPLETER
-%   
-%  
-%  % calcul de la TF de l'enregistrement audio bruité puis du module et de la phase 
-% TF_audioFiltre = ; % A COMPLETER
-% Module_TFfiltre= ; % A COMPLETER
-% Phase_TFfiltre = ; % A COMPLETER 
-%  
-%  % tracé du spectre (Module et Phase) de l'enregistrement audio filtré dans le domaine Fréquentiel 
-%   figure(5);
-%  % A COMPLETER 
-%   
-%  
-%  %  autres commandes de votre choix si besoin ----------------------------
-%  
+% filtrage du signal audio bruité 
+ son_filtre_1 = filter(num_1, denum_1, EnrAudio);% A COMPLETER
+ 
+ % tracé de l'enregistrement audio filtré dans le domaine temps
+ figure(4);
+ plot(Temps, son_filtre_1); % A COMPLETER
+  
+ % calcul de la TF de l'enregistrement audio bruité puis du module et de la phase 
+ TF_audioFiltre = fftshift(fft(son_filtre_1, NbPoint));
+ Module_TFfiltre= abs(TF_audioFiltre) / NbPoint;
+ Phase_TFfiltre = (360/(2*pi)) * angle(TF_audioFiltre);
+
+ % tracé du spectre (Module et Phase) de l'enregistrement audio filtré dans le domaine Fréquentiel 
+  figure(5);
+ % A COMPLETER 
+  subplot(2,1,1)
+   plot(Frequence, Module_TFfiltre)
+   title('Module du spectre de l''enregistrement audio filtré');
+   xlabel('Frequence (Hz)');
+   ylabel('Amplitude (V)');
+  subplot(2,1,2)
+   plot(Frequence, Phase_TFfiltre)
+   title('Phase de la TF de l''enregistrement audio filtré');
+   xlabel('Frequence (Hz)');
+   ylabel('Phase (Degré)'); 
+ 
+ %  autres commandes de votre choix si besoin ----------------------------
+ 
  
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
