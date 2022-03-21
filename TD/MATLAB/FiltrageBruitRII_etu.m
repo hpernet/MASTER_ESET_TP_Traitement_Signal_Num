@@ -7,70 +7,58 @@ close all;
 
 % A DECOMMENTER ET A COMPLETER
 
-% % Chargement données audio  
-%  [EnrAudio, ]  = audioread('');% A COMPLETER
-% 
-% 
-%  % Nombre de point ou d'échantillon de l'enregistrement audio
-%  NbPoint = ; % A COMPLETER
-% 
-%  %  autres commandes de votre choix si besoin ----------------------------
+% Chargement données audio  
+ [EnrAudio, Fe]  = audioread('EnreAudioBruite16Bits_1BruitFaibleNew.wav');
 
+ % Nombre de point ou d'échantillon de l'enregistrement audio
+ NbPoint = length(EnrAudio); % A COMPLETER
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACTIVITE 3  DU TP1 - PARTIE 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% A DECOMMENTER ET A COMPLETER
+% periode d'échantillonnage
+Te = 1/Fe;  % A COMPLETER
 
-% % periode d'échantillonnage
-% Te = ;  % A COMPLETER
-% 
-% %Vecteur temps pour le tracé dans le domaine temps
-% Temps =;  % A COMPLETER
-% 
-% % tracé de l'enregistrement audio dans le domaine temps
-% figure(1);
-% plot(Temps,); % A COMPLETER
-% title('Enregistrement audio bruité');
-% xlabel('Temps (s)');
-% ylabel('Amplitude (V)');
-% 
-% %  autres commandes de votre choix si besoin ----------------------------
+%Vecteur temps pour le tracé dans le domaine temps
+Temps = linspace(0, NbPoint*Te, NbPoint);
 
-
+% tracé de l'enregistrement audio dans le domaine temps
+figure(1);
+plot(Temps,EnrAudio); % A COMPLETER
+title('Enregistrement audio bruité');
+xlabel('Temps (s)');
+ylabel('Amplitude (V)');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACTIVITE 4  DU TP1 - PARTIE 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% A DECOMMENTER ET A COMPLETER
+%calcul de la TF de l'enregistrement audio bruité puis du module et de la phase
+TF_audioBruite = ; % A COMPLETER
+Module_TF= ;% A COMPLETER
+Phase_TF = ; % A COMPLETER
 
-% %calcul de la TF de l'enregistrement audio bruité puis du module et de la phase
-% TF_audioBruite = ; % A COMPLETER
-% Module_TF= ;% A COMPLETER
-% Phase_TF = ; % A COMPLETER
-% 
-% % pas frequentiel
-% PasFreq = ; % A COMPLETER
-% 
-% %Vecteur Frequence pour le tracé dans le domaine Frequentiel
-% Frequence =; % A COMPLETER
-% 
-% % Tracé de l'enregistrement audio dans le domaine fréquence
-% figure(2);
-% subplot(2,1,1)
-%    plot(Frequence,) % A COMPLETER
-%    title('Module du spectre de l''enregistrement audio bruité');
-%    xlabel('Frequence (Hz)');
-%    ylabel('Amplitude (V)');
-% subplot(2,1,2)
-%    plot(Frequence,) % A COMPLETER
-%    title('Phase de la TF de l''enregistrement audio bruité');
-%    xlabel('Frequence (Hz)');
-%    ylabel('Phase (Degré)');
-% 
-% %  autres commandes de votre choix si besoin ----------------------------
+% pas frequentiel
+PasFreq = ; % A COMPLETER
+
+%Vecteur Frequence pour le tracé dans le domaine Frequentiel
+Frequence =; % A COMPLETER
+
+% Tracé de l'enregistrement audio dans le domaine fréquence
+figure(2);
+subplot(2,1,1)
+   plot(Frequence,) % A COMPLETER
+   title('Module du spectre de l''enregistrement audio bruité');
+   xlabel('Frequence (Hz)');
+   ylabel('Amplitude (V)');
+subplot(2,1,2)
+   plot(Frequence,) % A COMPLETER
+   title('Phase de la TF de l''enregistrement audio bruité');
+   xlabel('Frequence (Hz)');
+   ylabel('Phase (Degré)');
+
+%  autres commandes de votre choix si besoin ----------------------------
    
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
