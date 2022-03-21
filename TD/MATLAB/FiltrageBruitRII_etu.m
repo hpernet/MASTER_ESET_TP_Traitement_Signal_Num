@@ -61,10 +61,10 @@ subplot(2,1,2)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 
 % Ordre du filtre. 
-N = 30; % A COMPLETER
+N = 10; % A COMPLETER
 
 % Frequence de coupure
-Fcut = 3200; % A COMPLETER
+Fcut = 600; % A COMPLETER
 
 % Creation du filtre  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,11 +73,11 @@ Fcut = 3200; % A COMPLETER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % BUTTER 
-  [num_1, denum_1] = butter(N , 2*Fcut/Fe, 'low'); %  A COMPLETER
+  [num_butter, denum_butter] = butter(N , 2*Fcut/Fe, 'low'); %  A COMPLETER
  
 % OU CHEBYSCHEV
-%  OscInBand = 0.1;
-%  [num_2, denum_2] = cheby1(N , 10, Fcut/Fe, 'low');   % A COMPLETER
+ OscInBand = 3;
+ [num_cheby, denum_cheby] = cheby1(N , OscInBand, Fcut/Fe, 'low');   % A COMPLETER
 
 % Tracé de la fonction de transfert du filtre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,26 +85,26 @@ Fcut = 3200; % A COMPLETER
 % l'aide de matlab ne le propose pas)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  figure(3);
- freqz(num_1, denum_1, [], Fe);
+ freqz(num_butter, denum_butter, [], Fe);
  title('Filtre Passe Bas'); 
 
-%  figure(3);
-%  freqz(num_2, denum_2, [], Fe);
-%  title('Filtre Passe Bas'); 
-
+ figure(3);
+ freqz(num_cheby, denum_cheby, [], Fe);
+ title('Filtre Passe Bas'); 
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACTIVITE 7  DU TP1 - PARTIE 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 % filtrage du signal audio bruité 
- son_filtre_1 = filter(num_1, denum_1, EnrAudio);% A COMPLETER
- 
+ son_filtre_butter = filter(num_butter, denum_butter, EnrAudio);% A COMPLETER
+ son_filtre_cheby  = filter(num_cheby,  denum_cheby,  EnrAudio);% A COMPLETER
+
  % tracé de l'enregistrement audio filtré dans le domaine temps
  figure(4);
- plot(Temps, son_filtre_1); % A COMPLETER
+ plot(Temps, son_filtre_butter); % A COMPLETER
   
  % calcul de la TF de l'enregistrement audio bruité puis du module et de la phase 
- TF_audioFiltre = fftshift(fft(son_filtre_1, NbPoint));
+ TF_audioFiltre = fftshift(fft(son_filtre_butter, NbPoint));
  Module_TFfiltre= abs(TF_audioFiltre) / NbPoint;
  Phase_TFfiltre = (360/(2*pi)) * angle(TF_audioFiltre);
 
@@ -126,7 +126,7 @@ Fcut = 3200; % A COMPLETER
 % ACTIVITE 8  DU TP1 - PARTIE 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 % Sauvegarde de l'enregistrement audio filtré  dans un fichier .wav pour ecoute   
-audiowrite('output.wav' ,  son_filtre_1,  Fe);  % A COMPLETER
+audiowrite('signal_filtree_440Hz.wav' ,  son_filtre_butter,  Fe);  % A COMPLETER
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACTIVITE 9  DU TP1 - PARTIE 1
