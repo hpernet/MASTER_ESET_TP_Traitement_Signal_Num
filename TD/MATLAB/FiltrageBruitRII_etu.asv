@@ -35,9 +35,9 @@ ylabel('Amplitude (V)');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %calcul de la TF de l'enregistrement audio bruité puis du module et de la phase
-TF_audioBruite = fftshift(fft(EnrAudio, NbPoint));
+TF_audioBruite = fftshift(fft(EnrAudio, NbPoint)); % A COMPLETER
 Module_TF = abs(TF_audioBruite);% A COMPLETER
-Phase_TF  = (360/(2*pi)) * angle(TF_audioBruite);
+Phase_TF  = 360/2 * angle(TF_audioBruite); % A COMPLETER
 
 % pas frequentiel
 PasFreq = Fe / NbPoint; % A COMPLETER
@@ -48,15 +48,18 @@ Frequence = [-(NbPoint-1)/2 : (NbPoint-1)/2] * PasFreq; % -Fe/2:PasFreq:Fe/2;
 % Tracé de l'enregistrement audio dans le domaine fréquence
 figure(2);
 subplot(2,1,1)
-   plot(Frequence, Module_TF)
+   plot(Frequence, Module_TF) % A COMPLETER
    title('Module du spectre de l''enregistrement audio bruité');
    xlabel('Frequence (Hz)');
    ylabel('Amplitude (V)');
 subplot(2,1,2)
-   plot(Frequence, Phase_TF)
+   plot(Frequence, Phase_TF) % A COMPLETER
    title('Phase de la TF de l''enregistrement audio bruité');
    xlabel('Frequence (Hz)');
-   ylabel('Phase (Degré)');   
+   ylabel('Phase (Degré)');
+
+%  autres commandes de votre choix si besoin ----------------------------
+   
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ACTIVITE 6  DU TP1 - PARTIE 1
