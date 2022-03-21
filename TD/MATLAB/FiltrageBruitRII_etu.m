@@ -36,7 +36,7 @@ ylabel('Amplitude (V)');
 
 %calcul de la TF de l'enregistrement audio bruité puis du module et de la phase
 TF_audioBruite = fftshift(fft(EnrAudio, NbPoint));
-Module_TF = abs(TF_audioBruite);% A COMPLETER
+Module_TF = abs(TF_audioBruite) / NbPoint;% A COMPLETER
 Phase_TF  = (360/(2*pi)) * angle(TF_audioBruite);
 
 % pas frequentiel
@@ -62,38 +62,38 @@ subplot(2,1,2)
 % ACTIVITE 6  DU TP1 - PARTIE 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 
-% A DECOMMENTER ET A COMPLETER
+% Ordre du filtre. 
+N = 10; % A COMPLETER
 
-% % Ordre du filtre. 
-% N = ; % A COMPLETER
-% 
-% % Frequence de coupure
-% Fcut = ; % A COMPLETER
-% 
-% % Creation du filtre  
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% % (voir sur internet le fonctionnement des filtres si
-% % l'aide de matlab ne le propose pas)
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
-% % BUTTER 
-%  [num_1, ]=butter(  , ); %  A COMPLETER
-%  
-%  % OU CHEBYSCHEV
-% %  OscInBand = 0.1;
-% %  [num_1, ] = cheby1( , , );   % A COMPLETER
+% Frequence de coupure
+Fcut = 3200; % A COMPLETER
 
+% Creation du filtre  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (voir sur internet le fonctionnement des filtres si
+% l'aide de matlab ne le propose pas)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% % Tracé de la fonction de transfert du filtre
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% % (voir sur internet le fonctionnement de freqz si
-% % l'aide de matlab ne le propose pas)
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  figure(3);
-%  freqz(    ,   ,  ,  ); % A COMPLETER
+% BUTTER 
+  [num_1, denum_1] = butter(N , Fcut/Fe, 'low'); %  A COMPLETER
+ 
+% OU CHEBYSCHEV
+%  OscInBand = 0.1;
+%  [num_2, denum_2] = cheby1(N , 10, Fcut/Fe, 'low');   % A COMPLETER
+
+% Tracé de la fonction de transfert du filtre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (voir sur internet le fonctionnement de freqz si
+% l'aide de matlab ne le propose pas)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ figure(3);
+ freqz(num_1, denum_1, [], Fe);
+ title('Filtre Passe Bas'); 
+
+%  figure(4);
+%  freqz(num_2, denum_2, [], Fe);
 %  title('Filtre Passe Bas'); 
-
-% %  autres commandes de votre choix si besoin ----------------------------
+%  autres commandes de votre choix si besoin ----------------------------
 
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
