@@ -86,6 +86,9 @@ plot(absice_AutoCorr, autocorr_WH3)
 figure(34)
 plot(absice_AutoCorr, autocorr_WH4)
 
+% On remarque qu'il y a un pic d'amplitude 128
+% Soit 128 points en commun entre les signaux
+
 % CODE A 16 CHIP
 NbPt_AutoCorr16 = length(autocorr_WH5);
 absice_AutoCorr16   = [-(NbPt_AutoCorr16 - 1) / 2 : (NbPt_AutoCorr16 - 1)/2] * Te;
@@ -99,5 +102,85 @@ plot(absice_AutoCorr16, autocorr_WH7)
 figure(38)
 plot(absice_AutoCorr16, autocorr_WH8)
 
+% Le pic de corrélation est plus important 
+
 % INTERCORR
+[autocorr_WH1_2,lags_WH1_2] = xcorr(Symbol_WH1,Symbol_WH2);
+
+figure(41)
+plot(absice_AutoCorr, autocorr_WH1_2)
+
+% On remarque que le pic est plus faible,
+% il n'y a pas de pic dominant 
+
+% Somme des signaux 
+Sum_WH_1_2 = Symbol_WH1 + Symbol_WH2;
+
+figure(50)
+plot(absice_temps, Sum_WH_1_2)
+axis([0 ChipTime -3 3])
+
+% Correlation 
+[intercorr_WH1,lags_WH1] = xcorr(Sum_WH_1_2,Symbol_WH1);
+[intercorr_WH2,lags_WH2] = xcorr(Sum_WH_1_2,Symbol_WH2);
+[intercorr_WH3,lags_WH3] = xcorr(Sum_WH_1_2,Symbol_WH3);
+[intercorr_WH4,lags_WH4] = xcorr(Sum_WH_1_2,Symbol_WH4);
+
+% AFFICHAGE AUTOCORR
+figure(51)
+plot(absice_AutoCorr, intercorr_WH1)
+figure(52)
+plot(absice_AutoCorr, intercorr_WH2)
+figure(53)
+plot(absice_AutoCorr, intercorr_WH3)
+figure(54)
+plot(absice_AutoCorr, intercorr_WH4)
+
+% AUDIO
+[s_audio, Fe_audio] = audioread("CodeAretrouver.wav");
+
+NbPt_audio = length(s_audio);
+Te_audio = Fe_audio;
+absice_audio = linspace(0, NbPt_audio, NbPt_audio) * Te_audio;
+
+figure(60)
+plot(absice_audio, s_audio)
+axis([0 NbPt_audio*Te_audio -1.5 1.5])
+
+% Correlation 
+[intercorr_audio_WH1,lags_WH1] = xcorr(s_audio,Symbol_WH1);
+[intercorr_audio_WH2,lags_WH2] = xcorr(s_audio,Symbol_WH2);
+[intercorr_audio_WH3,lags_WH3] = xcorr(s_audio,Symbol_WH3);
+[intercorr_audio_WH4,lags_WH4] = xcorr(s_audio,Symbol_WH4);
+
+NbPt_interCorr_audio = length(intercorr_audio_WH1);
+absice_intercorr_audio   = [-(NbPt_interCorr_audio - 1) / 2 : (NbPt_interCorr_audio - 1)/2] * Te_audio;
+
+% AFFICHAGE INTERCORR
+figure(61)
+plot(absice_intercorr_audio, intercorr_audio_WH1)
+figure(62)
+plot(absice_intercorr_audio, intercorr_audio_WH2)
+figure(63)
+plot(absice_intercorr_audio, intercorr_audio_WH3)
+figure(64)
+plot(absice_intercorr_audio, intercorr_audio_WH4)
+
+% BK et Quelconque
+codeBK  = [ 1 1 1 -1 -1  1 -1  0];
+codeQQ  = [ 1 1 1  1 -1 -1 -1 -1];
+
+[Symbol_BK, NbPt_Symbol_BK , Fech_BK] = FCT_CODE_WH(codeBK,ChipTime,Fe,Amplitude);
+[Symbol_QQ, NbPt_Symbol_QQ , Fech_QQ] = FCT_CODE_WH(codeQQ,ChipTime,Fe,Amplitude);
+
+% Correlation 
+[autocorr_BK, ~] = xcorr(Symbol_BK,Symbol_BK);
+[autocorr_QQ, ~] = xcorr(Symbol_QQ,Symbol_QQ);
+
+% AFFICHAGE AUTOCORR
+figure(71)
+plot(absice_AutoCorr, autocorr_BK)
+figure(72)
+plot(absice_AutoCorr, autocorr_QQ)
+
 
