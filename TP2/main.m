@@ -140,7 +140,7 @@ plot(absice_AutoCorr, intercorr_WH4)
 [s_audio, Fe_audio] = audioread("CodeAretrouver.wav");
 
 NbPt_audio = length(s_audio);
-Te_audio = Fe_audio;
+Te_audio = 1/Fe_audio;
 absice_audio = linspace(0, NbPt_audio, NbPt_audio) * Te_audio;
 
 figure(60)
@@ -182,5 +182,36 @@ figure(71)
 plot(absice_AutoCorr, autocorr_BK)
 figure(72)
 plot(absice_AutoCorr, autocorr_QQ)
+
+% AUDIO BRUITE
+[s_audio_br, Fe_audio_br] = audioread("CodeBruiteAretrouver.wav");
+
+NbPt_audio_br = length(s_audio_br);
+Te_audio_br = 1/Fe_audio_br;
+absice_audio_br = linspace(0, NbPt_audio_br, NbPt_audio_br) * Te_audio_br;
+
+figure(80)
+plot(absice_audio_br, s_audio_br)
+axis([0 NbPt_audio_br*Te_audio_br -1.5 1.5])
+
+% Correlation 
+[intercorr_audio_br_WH1, ~] = xcorr(s_audio_br,Symbol_WH1);
+[intercorr_audio_br_WH2, ~] = xcorr(s_audio_br,Symbol_WH2);
+[intercorr_audio_br_WH3, ~] = xcorr(s_audio_br,Symbol_WH3);
+[intercorr_audio_br_WH4, ~] = xcorr(s_audio_br,Symbol_WH4);
+
+NbPt_interCorr_audio_br = length(intercorr_audio_br_WH1);
+absice_intercorr_audio_br = [-(NbPt_interCorr_audio_br - 1) / 2 : (NbPt_interCorr_audio_br - 1)/2] * Te_audio_br;
+
+% AFFICHAGE INTERCORR
+figure(81)
+plot(absice_intercorr_audio_br, intercorr_audio_br_WH1)
+figure(82)
+plot(absice_intercorr_audio_br, intercorr_audio_br_WH2)
+figure(83)
+plot(absice_intercorr_audio_br, intercorr_audio_br_WH3)
+figure(84)
+plot(absice_intercorr_audio_br, intercorr_audio_br_WH4)
+
 
 
