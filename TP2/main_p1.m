@@ -12,8 +12,6 @@ codeWH6 = [ 1 -1  1 -1   1 -1  1 -1   1 -1  1 -1  1 -1  1 -1 ];
 codeWH7 = [ 1  1 -1 -1   1  1 -1 -1   1  1 -1 -1  1  1 -1 -1 ];
 codeWH8 = [ 1 -1 -1  1  -1  1  1 -1  -1  1  1 -1  1 -1 -1  1 ];
 
-codeBK  = [ 1 1 1 -1 -1 1 -1 0 ];
-
 % Variables declaration
 ChipTime = 0.002;
 Fe = 8000;
@@ -63,10 +61,10 @@ plot(absice_temps, Symbol_WH4)
 axis([0 ChipTime -1.5 1.5])
 
 % Correlation 
-[autocorr_WH1,lags_WH1] = xcorr(Symbol_WH1,Symbol_WH1);
-[autocorr_WH2,lags_WH2] = xcorr(Symbol_WH2,Symbol_WH2);
-[autocorr_WH3,lags_WH3] = xcorr(Symbol_WH3,Symbol_WH3);
-[autocorr_WH4,lags_WH4] = xcorr(Symbol_WH4,Symbol_WH4);
+[autocorr_WH1, ~] = xcorr(Symbol_WH1,Symbol_WH1);
+[autocorr_WH2, ~] = xcorr(Symbol_WH2,Symbol_WH2);
+[autocorr_WH3, ~] = xcorr(Symbol_WH3,Symbol_WH3);
+[autocorr_WH4, ~] = xcorr(Symbol_WH4,Symbol_WH4);
 
 [autocorr_WH5,lags_WH5] = xcorr(Symbol_WH5,Symbol_WH5);
 [autocorr_WH6,lags_WH6] = xcorr(Symbol_WH6,Symbol_WH6);
@@ -121,10 +119,10 @@ plot(absice_temps, Sum_WH_1_2)
 axis([0 ChipTime -3 3])
 
 % Correlation 
-[intercorr_WH1,lags_WH1] = xcorr(Sum_WH_1_2,Symbol_WH1);
-[intercorr_WH2,lags_WH2] = xcorr(Sum_WH_1_2,Symbol_WH2);
-[intercorr_WH3,lags_WH3] = xcorr(Sum_WH_1_2,Symbol_WH3);
-[intercorr_WH4,lags_WH4] = xcorr(Sum_WH_1_2,Symbol_WH4);
+[intercorr_WH1, ~] = xcorr(Sum_WH_1_2,Symbol_WH1);
+[intercorr_WH2, ~] = xcorr(Sum_WH_1_2,Symbol_WH2);
+[intercorr_WH3, ~] = xcorr(Sum_WH_1_2,Symbol_WH3);
+[intercorr_WH4, ~] = xcorr(Sum_WH_1_2,Symbol_WH4);
 
 % AFFICHAGE AUTOCORR
 figure(51)
